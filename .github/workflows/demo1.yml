@@ -1,0 +1,26 @@
+name: nodejs workflow
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  pulling_code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+      
+      - name: Install nodejs
+        uses: actions/setup-node@v4
+        # with:
+        #   node-version: 18
+      
+      - name: List files
+        run: ls -lrta
+        
+      - name: Install dependency
+        run: npm ci
+      
+      - name: perform test
+        run: npm test
