@@ -1,0 +1,37 @@
+name: deploy workflow
+on:
+  push:
+    branches:
+      - 'master'
+jobs:
+  test:  # Job-1
+    runs-on: ubuntu-latest  # Runner-1
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4     
+      - name: Install nodejs
+        uses: actions/setup-node@v4
+        # with:
+        #   node-version: 18
+      - name: List files
+        run: ls -lrta
+      - name: Install dependency
+        run: npm ci
+      - name: perform test
+        run: npm test
+  
+  deploy:  # Job-2
+    runs-on: ubuntu-latest  # Runner-2
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4     
+      - name: Install nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install dependency
+        run: npm ci
+      - name: Build Code
+        run: npm run build
+      - name: Build Dockerfile
+        run: echo "Build dockerfile..."
