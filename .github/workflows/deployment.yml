@@ -1,9 +1,8 @@
 name: deploy workflow
-on:
-  push:
-    branches:
-      - 'master'
+# Multiple triggers for this wf
+on: [workflow_dispatch,push]
 jobs:
+  # Multiple Jobs test and deploy
   test:  # Job-1
     runs-on: ubuntu-latest  # Runner-1
     steps:
