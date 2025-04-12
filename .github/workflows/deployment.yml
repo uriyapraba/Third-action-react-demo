@@ -21,6 +21,7 @@ jobs:
         run: npm test
   
   deploy:  # Job-2
+    needs: test # it is dependancy option. Job-2 will run once Job-1 is completed successfully.
     runs-on: ubuntu-latest  # Runner-2
     steps:
       - name: Get code
